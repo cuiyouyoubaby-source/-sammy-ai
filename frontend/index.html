@@ -164,247 +164,17 @@
             margin: 0 auto 30px;
         }
         
-        /* Sammy 可爱的 CSS 形象 */
-        .sammy-character {
+        /* Sammy 可爱的 CSS 形象 - 使用 SVG */
+        .sammy-svg {
             width: 220px;
             height: 220px;
-            position: relative;
             margin: 0 auto;
-            cursor: pointer;
-            transition: all 0.3s;
             display: block;
         }
         
-        .sammy-character:hover {
+        .sammy-svg:hover {
             transform: scale(1.05);
-        }
-        
-        .sammy-character.talking {
-            animation: talk 0.5s ease-in-out infinite;
-        }
-        
-        .sammy-character.happy {
-            animation: happy 1s ease-in-out infinite;
-        }
-        
-        @keyframes talk {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        @keyframes happy {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-10px) rotate(-5deg); }
-            75% { transform: translateY(-10px) rotate(5deg); }
-        }
-        
-        /* Sammy 身体 */
-        .sammy-body {
-            width: 160px;
-            height: 160px;
-            background: linear-gradient(135deg, #ffe4ec 0%, #ffc0cb 50%, #ff9a9e 100%);
-            border-radius: 50%;
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            box-shadow: 0 8px 25px rgba(255,107,157,0.3);
-            border: 4px solid #fff;
-        }
-        
-        /* Sammy 耳朵 */
-        .sammy-ear {
-            position: absolute;
-            width: 50px;
-            height: 60px;
-            background: linear-gradient(135deg, #ffc0cb 0%, #ff9a9e 100%);
-            border-radius: 50%;
-            border: 3px solid #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        
-        .sammy-ear.left {
-            top: 0;
-            left: 30px;
-            transform: rotate(-20deg);
-        }
-        
-        .sammy-ear.right {
-            top: 0;
-            right: 30px;
-            transform: rotate(20deg);
-        }
-        
-        .sammy-ear-inner {
-            position: absolute;
-            width: 30px;
-            height: 35px;
-            background: linear-gradient(135deg, #ffe4ec 0%, #ffc0cb 100%);
-            border-radius: 50%;
-            top: 10px;
-            left: 8px;
-        }
-        
-        /* Sammy 眼睛 */
-        .sammy-eye {
-            position: absolute;
-            width: 30px;
-            height: 35px;
-            background: #fff;
-            border-radius: 50%;
-            top: 80px;
-            border: 2px solid #333;
-        }
-        
-        .sammy-eye.left {
-            left: 55px;
-        }
-        
-        .sammy-eye.right {
-            right: 55px;
-        }
-        
-        .sammy-eye-pupil {
-            position: absolute;
-            width: 18px;
-            height: 22px;
-            background: #333;
-            border-radius: 50%;
-            top: 8px;
-            left: 6px;
-        }
-        
-        .sammy-eye-highlight {
-            position: absolute;
-            width: 8px;
-            height: 10px;
-            background: #fff;
-            border-radius: 50%;
-            top: 3px;
-            left: 3px;
-        }
-        
-        /* Sammy 腮红 */
-        .sammy-blush {
-            position: absolute;
-            width: 25px;
-            height: 15px;
-            background: rgba(255,107,157,0.3);
-            border-radius: 50%;
-            top: 110px;
-        }
-        
-        .sammy-blush.left {
-            left: 35px;
-        }
-        
-        .sammy-blush.right {
-            right: 35px;
-        }
-        
-        /* Sammy 嘴巴 */
-        .sammy-mouth {
-            position: absolute;
-            width: 30px;
-            height: 15px;
-            border: 3px solid #333;
-            border-top: none;
-            border-radius: 0 0 30px 30px;
-            top: 115px;
-            left: 95px;
-            background: #fff;
-        }
-        
-        .sammy-mouth.smile {
-            border-radius: 0 0 30px 30px;
-        }
-        
-        .sammy-mouth.open {
-            height: 20px;
-            background: #ff6b9d;
-            border-radius: 0 0 25px 25px;
-        }
-        
-        /* Sammy 小手 */
-        .sammy-hand {
-            position: absolute;
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #ffc0cb 0%, #ff9a9e 100%);
-            border-radius: 50%;
-            border: 3px solid #fff;
-            bottom: 40px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        
-        .sammy-hand.left {
-            left: 20px;
-        }
-        
-        .sammy-hand.right {
-            right: 20px;
-        }
-        
-        /* Sammy 小脚 */
-        .sammy-foot {
-            position: absolute;
-            width: 40px;
-            height: 25px;
-            background: linear-gradient(135deg, #ffc0cb 0%, #ff9a9e 100%);
-            border-radius: 50%;
-            border: 3px solid #fff;
-            bottom: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        
-        .sammy-foot.left {
-            left: 50px;
-        }
-        
-        .sammy-foot.right {
-            right: 50px;
-        }
-        
-        /* Sammy 蝴蝶结 */
-        .sammy-bow {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 30px;
-        }
-        
-        .sammy-bow::before,
-        .sammy-bow::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #ff6b9d;
-            border-radius: 50%;
-            border: 2px solid #fff;
-        }
-        
-        .sammy-bow::before {
-            left: 0;
-            transform: rotate(-30deg);
-        }
-        
-        .sammy-bow::after {
-            right: 0;
-            transform: rotate(30deg);
-        }
-        
-        .sammy-bow-center {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: #ff6b9d;
-            border-radius: 50%;
-            border: 2px solid #fff;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
+            transition: transform 0.3s;
         }
         
         .sammy-status {
@@ -723,49 +493,9 @@
                 gap: 20px;
             }
             
-            .sammy-character {
+            .sammy-svg {
                 width: 150px;
                 height: 150px;
-            }
-            
-            .sammy-body {
-                width: 120px;
-                height: 120px;
-                top: 15px;
-                left: 15px;
-            }
-            
-            .sammy-ear {
-                width: 35px;
-                height: 45px;
-            }
-            
-            .sammy-eye {
-                width: 22px;
-                height: 28px;
-                top: 50px;
-            }
-            
-            .sammy-eye-pupil {
-                width: 14px;
-                height: 18px;
-            }
-            
-            .sammy-mouth {
-                width: 22px;
-                height: 12px;
-                top: 80px;
-                left: 64px;
-            }
-            
-            .sammy-hand {
-                width: 25px;
-                height: 25px;
-            }
-            
-            .sammy-foot {
-                width: 30px;
-                height: 20px;
             }
         }
     </style>
@@ -798,51 +528,66 @@
             <!-- Sammy 展示区 -->
             <div class="sammy-display">
                 <div class="sammy-avatar-container">
-                    <!-- Sammy 可爱的 CSS 形象 -->
-                    <div class="sammy-character" id="sammyCharacter">
-                        <!-- 蝴蝶结 -->
-                        <div class="sammy-bow">
-                            <div class="sammy-bow-center"></div>
-                        </div>
-                        
-                        <!-- 耳朵 -->
-                        <div class="sammy-ear left">
-                            <div class="sammy-ear-inner"></div>
-                        </div>
-                        <div class="sammy-ear right">
-                            <div class="sammy-ear-inner"></div>
-                        </div>
-                        
+                    <!-- Sammy SVG 形象 -->
+                    <svg class="sammy-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
                         <!-- 身体 -->
-                        <div class="sammy-body"></div>
+                        <circle cx="110" cy="110" r="80" fill="url(#bodyGradient)" stroke="#fff" stroke-width="4"/>
                         
-                        <!-- 眼睛 -->
-                        <div class="sammy-eye left">
-                            <div class="sammy-eye-pupil">
-                                <div class="sammy-eye-highlight"></div>
-                            </div>
-                        </div>
-                        <div class="sammy-eye right">
-                            <div class="sammy-eye-pupil">
-                                <div class="sammy-eye-highlight"></div>
-                            </div>
-                        </div>
+                        <!-- 渐变定义 -->
+                        <defs>
+                            <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ffe4ec"/>
+                                <stop offset="50%" style="stop-color:#ffc0cb"/>
+                                <stop offset="100%" style="stop-color:#ff9a9e"/>
+                            </linearGradient>
+                            <linearGradient id="earGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ffc0cb"/>
+                                <stop offset="100%" style="stop-color:#ff9a9e"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- 左耳 -->
+                        <ellipse cx="60" cy="50" rx="25" ry="35" fill="url(#earGradient)" stroke="#fff" stroke-width="3" transform="rotate(-20 60 50)"/>
+                        <ellipse cx="60" cy="55" rx="15" ry="20" fill="#ffe4ec" transform="rotate(-20 60 55)"/>
+                        
+                        <!-- 右耳 -->
+                        <ellipse cx="160" cy="50" rx="25" ry="35" fill="url(#earGradient)" stroke="#fff" stroke-width="3" transform="rotate(20 160 50)"/>
+                        <ellipse cx="160" cy="55" rx="15" ry="20" fill="#ffe4ec" transform="rotate(20 160 55)"/>
+                        
+                        <!-- 蝴蝶结 -->
+                        <ellipse cx="90" cy="25" rx="15" ry="10" fill="#ff6b9d" stroke="#fff" stroke-width="2" transform="rotate(-30 90 25)"/>
+                        <ellipse cx="130" cy="25" rx="15" ry="10" fill="#ff6b9d" stroke="#fff" stroke-width="2" transform="rotate(30 130 25)"/>
+                        <circle cx="110" cy="25" r="8" fill="#ff6b9d" stroke="#fff" stroke-width="2"/>
+                        
+                        <!-- 左眼 -->
+                        <ellipse cx="85" cy="100" rx="12" ry="15" fill="#fff" stroke="#333" stroke-width="2"/>
+                        <circle cx="85" cy="100" r="8" fill="#333"/>
+                        <circle cx="87" cy="97" r="3" fill="#fff"/>
+                        
+                        <!-- 右眼 -->
+                        <ellipse cx="135" cy="100" rx="12" ry="15" fill="#fff" stroke="#333" stroke-width="2"/>
+                        <circle cx="135" cy="100" r="8" fill="#333"/>
+                        <circle cx="137" cy="97" r="3" fill="#fff"/>
                         
                         <!-- 腮红 -->
-                        <div class="sammy-blush left"></div>
-                        <div class="sammy-blush right"></div>
+                        <ellipse cx="70" cy="120" rx="12" ry="8" fill="rgba(255,107,157,0.3)"/>
+                        <ellipse cx="150" cy="120" rx="12" ry="8" fill="rgba(255,107,157,0.3)"/>
                         
                         <!-- 嘴巴 -->
-                        <div class="sammy-mouth smile" id="sammyMouth"></div>
+                        <path d="M 100 125 Q 110 135 120 125" fill="none" stroke="#333" stroke-width="3" stroke-linecap="round"/>
                         
-                        <!-- 小手 -->
-                        <div class="sammy-hand left"></div>
-                        <div class="sammy-hand right"></div>
+                        <!-- 左手 -->
+                        <circle cx="50" cy="140" r="15" fill="url(#earGradient)" stroke="#fff" stroke-width="3"/>
                         
-                        <!-- 小脚 -->
-                        <div class="sammy-foot left"></div>
-                        <div class="sammy-foot right"></div>
-                    </div>
+                        <!-- 右手 -->
+                        <circle cx="170" cy="140" r="15" fill="url(#earGradient)" stroke="#fff" stroke-width="3"/>
+                        
+                        <!-- 左脚 -->
+                        <ellipse cx="80" cy="180" rx="20" ry="12" fill="url(#earGradient)" stroke="#fff" stroke-width="3"/>
+                        
+                        <!-- 右脚 -->
+                        <ellipse cx="140" cy="180" rx="20" ry="12" fill="url(#earGradient)" stroke="#fff" stroke-width="3"/>
+                    </svg>
                     <div class="sammy-status"></div>
                 </div>
                 
@@ -967,17 +712,6 @@
             utterance.pitch = 1.5;
             utterance.volume = 1;
             
-            // Sammy 说话时添加动画
-            const character = document.getElementById('sammyCharacter');
-            const mouth = document.getElementById('sammyMouth');
-            character.classList.add('talking');
-            mouth.classList.add('open');
-            
-            utterance.onend = function() {
-                character.classList.remove('talking');
-                mouth.classList.remove('open');
-            };
-            
             speechSynthesis.speak(utterance);
         }
         
@@ -1013,27 +747,16 @@
         
         // Sammy 的反应
         function sammyReact(type) {
-            const character = document.getElementById('sammyCharacter');
-            const mouth = document.getElementById('sammyMouth');
             const reactions = {
-                chat: { text: 'Sammy 很开心和你聊天！', animation: 'happy' },
-                feed: { text: 'Sammy 吃得好香呀～', animation: 'happy' },
-                play: { text: 'Sammy 玩得好开心！', animation: 'happy' },
-                sleep: { text: 'Sammy 要睡觉觉了，晚安～', animation: '' }
+                chat: 'Sammy 很开心和你聊天！',
+                feed: 'Sammy 吃得好香呀～',
+                play: 'Sammy 玩得好开心！',
+                sleep: 'Sammy 要睡觉觉了，晚安～'
             };
             
             const reaction = reactions[type];
             if (reaction) {
-                // 添加动画
-                character.classList.add(reaction.animation);
-                mouth.classList.add('open');
-                setTimeout(() => {
-                    character.classList.remove(reaction.animation);
-                    mouth.classList.remove('open');
-                }, 2000);
-                
-                // Sammy 说话
-                speak(reaction.text);
+                speak(reaction);
             }
         }
         
