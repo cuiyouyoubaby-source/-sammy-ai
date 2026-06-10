@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sammy AI - 云养娃陪伴</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 顶部导航 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .logo-text h1 {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 800;
+        }
+        
+        .logo-text p {
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn {
+            padding: 10px 24px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #fff;
+            color: #667eea;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* 主要内容区 */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+        }
+        
+        /* Sammy 展示区 */
+        .sammy-display {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .sammy-avatar {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        
+        .sammy-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #667eea;
+        }
+        
+        .sammy-status {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: #52c41a;
+            border-radius: 50%;
+            border: 3px solid #fff;
+        }
+        
+        .sammy-info h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .sammy-info .age {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .sammy-mood {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: #f0f2ff;
+            border-radius: 20px;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        /* 成长进度 */
+        .growth-section {
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .growth-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .growth-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .growth-stat {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .growth-stat .value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .growth-stat .label {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+        
+        /* 互动区 */
+        .interaction-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .panel-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .panel-card h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        /* 互动按钮 */
+        .interaction-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .interaction-btn {
+            padding: 15px;
+            border-radius: 16px;
+            border: 2px solid #f0f0f0;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .interaction-btn:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+        
+        .interaction-btn .icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .interaction-btn .label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        /* 聊天记录 */
+        .chat-history {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .chat-message {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        
+        .chat-message.user {
+            flex-direction: row-reverse;
+        }
+        
+        .chat-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .chat-avatar.sammy {
+            background: #f0f2ff;
+        }
+        
+        .chat-avatar.user {
+            background: #e6f7ff;
+        }
+        
+        .chat-bubble {
+            padding: 12px 16px;
+            border-radius: 18px;
+            max-width: 200px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .chat-bubble.sammy {
+            background: #f0f2ff;
+            color: #333;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .chat-bubble.user {
+            background: #667eea;
+            color: #fff;
+            border-bottom-right-radius: 4px;
+        }
+        
+        /* 输入框 */
+        .chat-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #f0f0f0;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+        }
+        
+        .chat-input input:focus {
+            border-color: #667eea;
+        }
+        
+        .chat-input button {
+            padding: 12px 24px;
+            background: #667eea;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .chat-input button:hover {
+            background: #5a67d8;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .sammy-avatar {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部导航 -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">👶</div>
+                <div class="logo-text">
+                    <h1>Sammy AI</h1>
+                    <p>你的云端小宝贝</p>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline" onclick="showProfile()">个人中心</button>
+                <button class="btn btn-primary" onclick="showSettings()">设置</button>
+            </div>
+        </header>
+        
+        <!-- 主要内容 -->
+        <div class="main-content">
+            <!-- Sammy 展示区 -->
+            <div class="sammy-display">
+                <div class="sammy-avatar">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sammy&backgroundColor=b6e3f4" alt="Sammy">
+                    <div class="sammy-status"></div>
+                </div>
+                
+                <div class="sammy-info">
+                    <h2>Sammy</h2>
+                    <p class="age">3岁 · 活泼开朗的小可爱</p>
+                    <div class="sammy-mood">
+                        <span>😊</span>
+                        <span>心情很好</span>
+                    </div>
+                </div>
+                
+                <!-- 成长进度 -->
+                <div class="growth-section">
+                    <h3>成长进度</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%;">65%</div>
+                    </div>
+                    <div class="growth-stats">
+                        <div class="growth-stat">
+                            <div class="value">1,250</div>
+                            <div class="label">成长点数</div>
+                        </div>
+                        <div class="growth-stat">
+                            <div class="value">128</div>
+                            <div class="label">互动次数</div>
+                        </div>
+                        <div class="growth-stat">
+                            <div class="value">15</div>
+                            <div class="label">陪伴天数</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 互动面板 -->
+            <div class="interaction-panel">
+                <!-- 互动按钮 -->
+                <div class="panel-card">
+                    <h3>🎮 和 Sammy 互动</h3>
+                    <div class="interaction-buttons">
+                        <div class="interaction-btn" onclick="interact('chat')">
+                            <div class="icon">💬</div>
+                            <div class="label">聊天</div>
+                        </div>
+                        <div class="interaction-btn" onclick="interact('feed')">
+                            <div class="icon">🍼</div>
+                            <div class="label">喂食</div>
+                        </div>
+                        <div class="interaction-btn" onclick="interact('play')">
+                            <div class="icon">🎮</div>
+                            <div class="label">玩耍</div>
+                        </div>
+                        <div class="interaction-btn" onclick="interact('sleep')">
+                            <div class="icon">😴</div>
+                            <div class="label">哄睡</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 聊天记录 -->
+                <div class="panel-card">
+                    <h3>💬 聊天记录</h3>
+                    <div class="chat-history" id="chatHistory">
+                        <div class="chat-message">
+                            <div class="chat-avatar sammy">👶</div>
+                            <div class="chat-bubble sammy">你好呀！我是 Sammy，今天也要开心哦～</div>
+                        </div>
+                        <div class="chat-message user">
+                            <div class="chat-avatar user">😊</div>
+                            <div class="chat-bubble user">Sammy 早呀！</div>
+                        </div>
+                        <div class="chat-message">
+                            <div class="chat-avatar sammy">👶</div>
+                            <div class="chat-bubble sammy">早呀！今天天气真好，我们一起出去玩吧！</div>
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" placeholder="和 Sammy 说点什么..." id="chatInput">
+                        <button onclick="sendMessage()">发送</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 互动功能
+        function interact(type) {
+            const messages = {
+                chat: 'Sammy 很开心和你聊天！',
+                feed: 'Sammy 吃得好香呀～',
+                play: 'Sammy 玩得好开心！',
+                sleep: 'Sammy 要睡觉觉了，晚安～'
+            };
+            
+            alert(messages[type]);
+        }
+        
+        // 发送消息
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // 添加用户消息
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // 模拟 Sammy 回复
+            setTimeout(() => {
+                const responses = [
+                    '真的吗？好有趣呀！',
+                    'Sammy 也这么想！',
+                    '哇，好厉害！',
+                    'Sammy 想和你一起玩～',
+                    '今天好开心呀！'
+                ];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                addMessage(randomResponse, 'sammy');
+            }, 1000);
+        }
+        
+        // 添加消息到聊天历史
+        function addMessage(text, sender) {
+            const chatHistory = document.getElementById('chatHistory');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}`;
+            
+            const avatar = sender === 'user' ? '😊' : '👶';
+            const avatarClass = sender;
+            
+            messageDiv.innerHTML = `
+                <div class="chat-avatar ${avatarClass}">${avatar}</div>
+                <div class="chat-bubble ${avatarClass}">${text}</div>
+            `;
+            
+            chatHistory.appendChild(messageDiv);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+        
+        // 显示个人中心
+        function showProfile() {
+            alert('个人中心功能开发中...');
+        }
+        
+        // 显示设置
+        function showSettings() {
+            alert('设置功能开发中...');
+        }
+        
+        // 监听回车键
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
