@@ -1,129 +1,128 @@
 # Sammy AI - 云养娃陪伴产品
 
-基于 PocketBase 的 AI 云养娃陪伴产品，为用户提供沉浸式虚拟宝宝陪伴体验。
+🎉 **Sammy AI** 是一个基于 PocketBase 的云养娃陪伴产品，让你可以随时随地与可爱的 AI 宝贝 Sammy 互动。
 
-## 项目概述
+## ✨ 新特性
 
-Sammy AI 是一款全平台沉浸式 AI 云养娃陪伴产品，聚焦当代年轻人独居孤独、晚婚不育、情绪内耗，以及老年人空巢寂寞、缺乏情感寄托的核心痛点。
+### 🎨 全新视觉设计
+- **粉色渐变主题**：温馨可爱的视觉风格
+- **浮动泡泡动画**：活泼生动的背景效果
+- **圆润卡片设计**：现代简约的用户界面
+- **响应式布局**：完美适配手机和电脑
 
-## 核心功能
+### 🎮 丰富的互动功能
+- **聊天**：与 Sammy 进行有趣的对话
+- **喂食**：给 Sammy 喂食，看它开心地吃饭
+- **玩耍**：和 Sammy 一起玩游戏
+- **哄睡**：温柔地哄 Sammy 入睡
 
-### 1. 个性化人设自定义系统
-- 自定义性别、初始年龄、外貌风格
-- 自主选择性格特质：活泼开朗、温柔乖巧、调皮可爱、安静内敛、治愈软萌等
-- 可微调五官、穿搭、造型样式
+### 🗣️ 语音交互
+- **语音合成**：Sammy 会用可爱的声音和你说话
+- **语音输入**：支持语音输入，解放双手
+- **实时反馈**：Sammy 会根据互动给出语音反应
 
-### 2. 现实同步真实成长引擎
-- 以真实日历、天数为成长基准
-- 随时间推移逐步增长年龄、变化心智
-- 行为、语言、情绪、认知能力随年龄同步迭代
+### 📊 成长系统
+- **成长进度**：实时查看 Sammy 的成长状态
+- **互动统计**：记录每次互动的次数和类型
+- **心情变化**：Sammy 的心情会随着互动而变化
 
-### 3. 全动态拟人化交互体验
-- 实时语音对话
-- 动态表情系统
-- 肢体动态效果
-- 主动陪伴机制
+## 🚀 快速开始
 
-### 4. 双端全场景适配
-- 移动端：轻便随时玩
-- PC端：高清大屏动态展示
-- 数据云端互通
-
-## 技术栈
-
-- **后端**: PocketBase (Go)
-- **前端**: HTML5 + JavaScript + ECharts
-- **数据库**: SQLite
-- **实时通信**: WebSocket
-
-## 快速开始
-
-### 安装依赖
+### 本地开发
 
 ```bash
-# 安装 Go 依赖
-go mod tidy
+# 克隆项目
+git clone https://github.com/cuiyouyoubaby-source/-sammy-ai.git
+cd -sammy-ai
 
-# 构建项目
-go build -o sammy-ai
+# 启动服务
+./start.sh
 ```
 
-### 运行项目
+### 访问地址
 
-```bash
-# 启动 PocketBase 服务
-./sammy-ai serve
+- 🌐 **前端页面**: http://localhost:8090
+- 🔧 **管理后台**: http://localhost:8090/_
+- 📚 **API 文档**: http://localhost:8090/api
 
-# 访问管理后台
-# http://localhost:8090/_/ (admin@example.com / admin123)
+## 🛠️ 技术栈
 
-# 访问前端页面
-# http://localhost:8090
+- **后端**: Go + PocketBase
+- **前端**: HTML5 + CSS3 + JavaScript
+- **语音**: Web Speech API
+- **动画**: CSS3 Animations
+
+## 📱 功能特性
+
+### 已实现
+- ✅ 可爱的 Sammy 形象展示
+- ✅ 丰富的互动功能（聊天、喂食、玩耍、哄睡）
+- ✅ 语音合成（Sammy 会说话）
+- ✅ 语音输入支持
+- ✅ 成长进度追踪
+- ✅ 互动历史记录
+- ✅ 响应式设计
+
+### 开发中
+- 🔄 更多 Sammy 表情和动作
+- 🔄 个性化定制
+- 🔄 多用户支持
+- 🔄 云端数据同步
+
+## 🎨 设计特色
+
+### 视觉风格
+- **粉色渐变**：温馨可爱的主色调
+- **圆润设计**：友好的视觉体验
+- **动画效果**：生动的交互反馈
+- **浮动元素**：活泼的页面氛围
+
+### 交互设计
+- **即时反馈**：每次互动都有视觉和语音反馈
+- **动画过渡**：流畅的页面切换效果
+- **语音交互**：自然的对话体验
+- **成长系统**：可视化的进度展示
+
+## 📝 API 文档
+
+### 互动 API
+
+```http
+POST /api/sammy/interact
+Content-Type: application/json
+
+{
+  "type": "chat",
+  "content": "你好呀"
+}
 ```
 
-## 项目结构
+### 聊天 API
 
-```
-sammy-ai/
-├── main.go              # 主入口文件
-├── go.mod               # Go 模块配置
-├── go.sum               # Go 依赖锁定
-├── pb_data/             # PocketBase 数据目录
-├── pb_migrations/       # 数据库迁移文件
-├── pb_hooks/            # 自定义钩子
-├── frontend/            # 前端页面
-│   ├── index.html       # 主页面
-│   ├── css/
-│   └── js/
-└── README.md
+```http
+POST /api/sammy/chat
+Content-Type: application/json
+
+{
+  "message": "今天天气真好"
+}
 ```
 
-## API 接口
+### 语音合成 API
 
-### Sammy 成长状态
-- **GET** `/api/sammy/growth/:userId`
-- 获取 Sammy 的成长状态
+```http
+POST /api/sammy/tts
+Content-Type: application/json
 
-### Sammy 互动
-- **POST** `/api/sammy/interact`
-- 与 Sammy 进行互动
+{
+  "text": "你好呀！我是 Sammy"
+}
+```
 
-## 数据库集合
+## 🤝 贡献
 
-### users (系统自带)
-- 用户认证集合
+欢迎提交 Issue 和 Pull Request！
 
-### sammy_profiles
-- userId: 关联用户
-- name: Sammy 名字
-- gender: 性别
-- birthDate: 出生日期
-- personality: 性格特质
-- appearance: 外貌风格
-- growthPoints: 成长点数
-- mood: 当前心情
-- lastInteraction: 最后互动时间
+## 📄 许可证
 
-### interactions
-- userId: 关联用户
-- sammyId: 关联 Sammy
-- type: 互动类型 (chat/voice/play/sleep)
-- content: 互动内容
-- moodChange: 心情变化
-- timestamp: 时间戳
-
-## 开发计划
-
-- [x] 项目初始化
-- [ ] 数据库集合创建
-- [ ] 用户认证系统
-- [ ] Sammy 人设系统
-- [ ] 成长引擎
-- [ ] 互动系统
-- [ ] 前端页面
-- [ ] 语音交互
-- [ ] 移动端适配
-
-## 许可证
-
-MIT
+MIT License

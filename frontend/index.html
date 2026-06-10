@@ -14,15 +14,32 @@
         
         body {
             font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
             min-height: 100vh;
             color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* 浮动泡泡动画 */
+        .bubble {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
         
         /* 顶部导航 */
@@ -50,16 +67,23 @@
             justify-content: center;
             font-size: 28px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
         
         .logo-text h1 {
             color: #fff;
             font-size: 24px;
             font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .logo-text p {
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.9);
             font-size: 13px;
         }
         
@@ -80,70 +104,118 @@
         
         .btn-primary {
             background: #fff;
-            color: #667eea;
+            color: #ff6b9d;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
         
         .btn-outline {
-            background: transparent;
+            background: rgba(255,255,255,0.2);
             color: #fff;
             border: 2px solid rgba(255,255,255,0.5);
         }
         
         .btn-outline:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.3);
         }
         
         /* 主要内容区 */
         .main-content {
             display: grid;
-            grid-template-columns: 1fr 350px;
+            grid-template-columns: 1fr 380px;
             gap: 30px;
         }
         
         /* Sammy 展示区 */
         .sammy-display {
             background: #fff;
-            border-radius: 24px;
+            border-radius: 30px;
             padding: 40px;
             text-align: center;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sammy-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,107,157,0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .sammy-avatar-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 30px;
         }
         
         .sammy-avatar {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 30px;
-            position: relative;
-        }
-        
-        .sammy-avatar img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid #667eea;
+            border: 5px solid #ff6b9d;
+            box-shadow: 0 8px 30px rgba(255,107,157,0.3);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .sammy-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(255,107,157,0.4);
+        }
+        
+        .sammy-avatar.talking {
+            animation: talk 0.5s ease-in-out infinite;
+        }
+        
+        .sammy-avatar.happy {
+            animation: happy 1s ease-in-out infinite;
+        }
+        
+        @keyframes talk {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes happy {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(-5deg); }
+            75% { transform: translateY(-10px) rotate(5deg); }
         }
         
         .sammy-status {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
-            width: 30px;
-            height: 30px;
+            bottom: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
             background: #52c41a;
             border-radius: 50%;
             border: 3px solid #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
         .sammy-info h2 {
-            font-size: 28px;
+            font-size: 32px;
             color: #333;
             margin-bottom: 8px;
+            font-weight: 800;
         }
         
         .sammy-info .age {
@@ -156,11 +228,13 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 20px;
-            background: #f0f2ff;
-            border-radius: 20px;
-            color: #667eea;
-            font-weight: 600;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            border-radius: 25px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(255,107,157,0.3);
         }
         
         /* 成长进度 */
@@ -173,20 +247,22 @@
             font-size: 18px;
             margin-bottom: 15px;
             color: #333;
+            font-weight: 700;
         }
         
         .progress-bar {
             width: 100%;
-            height: 20px;
+            height: 24px;
             background: #f0f0f0;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
         }
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 10px;
+            background: linear-gradient(90deg, #ff6b9d, #ff8fa3);
+            border-radius: 12px;
             transition: width 0.5s;
             display: flex;
             align-items: center;
@@ -194,7 +270,7 @@
             padding-right: 10px;
             color: #fff;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
         }
         
         .growth-stats {
@@ -205,22 +281,30 @@
         }
         
         .growth-stat {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 12px;
+            background: linear-gradient(135deg, #fff5f7, #fff0f3);
+            padding: 20px;
+            border-radius: 16px;
             text-align: center;
+            border: 2px solid #ffe4ec;
+            transition: all 0.3s;
+        }
+        
+        .growth-stat:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,107,157,0.1);
         }
         
         .growth-stat .value {
-            font-size: 24px;
-            font-weight: 700;
-            color: #667eea;
+            font-size: 28px;
+            font-weight: 800;
+            color: #ff6b9d;
         }
         
         .growth-stat .label {
-            font-size: 12px;
+            font-size: 13px;
             color: #999;
             margin-top: 4px;
+            font-weight: 600;
         }
         
         /* 互动区 */
@@ -232,15 +316,16 @@
         
         .panel-card {
             background: #fff;
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 25px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
         }
         
         .panel-card h3 {
             font-size: 18px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: #333;
+            font-weight: 700;
         }
         
         /* 互动按钮 */
@@ -251,9 +336,9 @@
         }
         
         .interaction-btn {
-            padding: 15px;
-            border-radius: 16px;
-            border: 2px solid #f0f0f0;
+            padding: 20px;
+            border-radius: 20px;
+            border: 2px solid #ffe4ec;
             background: #fff;
             cursor: pointer;
             transition: all 0.3s;
@@ -261,19 +346,31 @@
         }
         
         .interaction-btn:hover {
-            border-color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+            border-color: #ff6b9d;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255,107,157,0.2);
+            background: linear-gradient(135deg, #fff5f7, #fff0f3);
+        }
+        
+        .interaction-btn:active {
+            transform: scale(0.95);
         }
         
         .interaction-btn .icon {
-            font-size: 32px;
-            margin-bottom: 8px;
+            font-size: 36px;
+            margin-bottom: 10px;
+            display: block;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
         
         .interaction-btn .label {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             color: #333;
         }
         
@@ -281,6 +378,7 @@
         .chat-history {
             max-height: 300px;
             overflow-y: auto;
+            padding: 10px;
         }
         
         .chat-message {
@@ -288,6 +386,12 @@
             gap: 10px;
             margin-bottom: 15px;
             align-items: flex-start;
+            animation: messageSlide 0.3s ease-out;
+        }
+        
+        @keyframes messageSlide {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .chat-message.user {
@@ -295,40 +399,42 @@
         }
         
         .chat-avatar {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
         .chat-avatar.sammy {
-            background: #f0f2ff;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
         }
         
         .chat-avatar.user {
-            background: #e6f7ff;
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
         }
         
         .chat-bubble {
-            padding: 12px 16px;
-            border-radius: 18px;
-            max-width: 200px;
+            padding: 12px 18px;
+            border-radius: 20px;
+            max-width: 220px;
             font-size: 14px;
             line-height: 1.5;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
         
         .chat-bubble.sammy {
-            background: #f0f2ff;
+            background: linear-gradient(135deg, #fff5f7, #fff0f3);
             color: #333;
             border-bottom-left-radius: 4px;
         }
         
         .chat-bubble.user {
-            background: #667eea;
+            background: linear-gradient(135deg, #ff6b9d, #ff8fa3);
             color: #fff;
             border-bottom-right-radius: 4px;
         }
@@ -342,30 +448,60 @@
         
         .chat-input input {
             flex: 1;
-            padding: 12px 20px;
-            border: 2px solid #f0f0f0;
+            padding: 14px 24px;
+            border: 2px solid #ffe4ec;
             border-radius: 25px;
             outline: none;
             font-size: 14px;
+            transition: all 0.3s;
         }
         
         .chat-input input:focus {
-            border-color: #667eea;
+            border-color: #ff6b9d;
+            box-shadow: 0 0 0 3px rgba(255,107,157,0.1);
         }
         
         .chat-input button {
-            padding: 12px 24px;
-            background: #667eea;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #ff6b9d, #ff8fa3);
             color: #fff;
             border: none;
             border-radius: 25px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,107,157,0.3);
         }
         
         .chat-input button:hover {
-            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,157,0.4);
+        }
+        
+        /* 语音按钮 */
+        .voice-btn {
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+        
+        .voice-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .voice-btn.recording {
+            animation: pulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         
         /* 响应式 */
@@ -379,7 +515,7 @@
                 gap: 20px;
             }
             
-            .sammy-avatar {
+            .sammy-avatar-container {
                 width: 150px;
                 height: 150px;
             }
@@ -387,6 +523,12 @@
     </style>
 </head>
 <body>
+    <!-- 浮动泡泡背景 -->
+    <div class="bubble" style="width: 60px; height: 60px; background: #ff9a9e; top: 10%; left: 5%; animation-delay: 0s;"></div>
+    <div class="bubble" style="width: 40px; height: 40px; background: #fecfef; top: 20%; right: 10%; animation-delay: 1s;"></div>
+    <div class="bubble" style="width: 80px; height: 80px; background: #ff9a9e; bottom: 20%; left: 10%; animation-delay: 2s;"></div>
+    <div class="bubble" style="width: 50px; height: 50px; background: #fecfef; bottom: 10%; right: 5%; animation-delay: 3s;"></div>
+    
     <div class="container">
         <!-- 顶部导航 -->
         <header class="header">
@@ -407,8 +549,11 @@
         <div class="main-content">
             <!-- Sammy 展示区 -->
             <div class="sammy-display">
-                <div class="sammy-avatar">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sammy&backgroundColor=b6e3f4" alt="Sammy">
+                <div class="sammy-avatar-container">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sammy&backgroundColor=ffdfba&eyes=happy&mouth=smile&accessories=glasses" 
+                         alt="Sammy" 
+                         class="sammy-avatar" 
+                         id="sammyAvatar">
                     <div class="sammy-status"></div>
                 </div>
                 
@@ -477,17 +622,10 @@
                             <div class="chat-avatar sammy">👶</div>
                             <div class="chat-bubble sammy">你好呀！我是 Sammy，今天也要开心哦～</div>
                         </div>
-                        <div class="chat-message user">
-                            <div class="chat-avatar user">😊</div>
-                            <div class="chat-bubble user">Sammy 早呀！</div>
-                        </div>
-                        <div class="chat-message">
-                            <div class="chat-avatar sammy">👶</div>
-                            <div class="chat-bubble sammy">早呀！今天天气真好，我们一起出去玩吧！</div>
-                        </div>
                     </div>
                     <div class="chat-input">
                         <input type="text" placeholder="和 Sammy 说点什么..." id="chatInput">
+                        <button class="voice-btn" onclick="toggleVoice()" title="语音输入">🎤</button>
                         <button onclick="sendMessage()">发送</button>
                     </div>
                 </div>
@@ -496,8 +634,118 @@
     </div>
     
     <script>
+        // 语音合成
+        const speechSynthesis = window.speechSynthesis;
+        let isRecording = false;
+        let recognition = null;
+        
+        // 初始化语音识别
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.lang = 'zh-CN';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('chatInput').value = transcript;
+                sendMessage();
+            };
+            
+            recognition.onerror = function(event) {
+                console.error('语音识别错误:', event.error);
+                isRecording = false;
+                updateVoiceButton();
+            };
+            
+            recognition.onend = function() {
+                isRecording = false;
+                updateVoiceButton();
+            };
+        }
+        
+        // 语音合成（Sammy 说话）
+        function speak(text) {
+            if (!speechSynthesis) return;
+            
+            // 取消之前的语音
+            speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-CN';
+            utterance.rate = 1.2;
+            utterance.pitch = 1.5;
+            utterance.volume = 1;
+            
+            // Sammy 说话时添加动画
+            const avatar = document.getElementById('sammyAvatar');
+            avatar.classList.add('talking');
+            
+            utterance.onend = function() {
+                avatar.classList.remove('talking');
+            };
+            
+            speechSynthesis.speak(utterance);
+        }
+        
+        // 切换语音输入
+        function toggleVoice() {
+            if (!recognition) {
+                alert('您的浏览器不支持语音识别，请使用文字输入');
+                return;
+            }
+            
+            if (isRecording) {
+                recognition.stop();
+                isRecording = false;
+            } else {
+                recognition.start();
+                isRecording = true;
+            }
+            
+            updateVoiceButton();
+        }
+        
+        // 更新语音按钮状态
+        function updateVoiceButton() {
+            const btn = document.querySelector('.voice-btn');
+            if (isRecording) {
+                btn.classList.add('recording');
+                btn.textContent = '🔴';
+            } else {
+                btn.classList.remove('recording');
+                btn.textContent = '🎤';
+            }
+        }
+        
+        // Sammy 的反应
+        function sammyReact(type) {
+            const avatar = document.getElementById('sammyAvatar');
+            const reactions = {
+                chat: { text: 'Sammy 很开心和你聊天！', animation: 'happy' },
+                feed: { text: 'Sammy 吃得好香呀～', animation: 'happy' },
+                play: { text: 'Sammy 玩得好开心！', animation: 'happy' },
+                sleep: { text: 'Sammy 要睡觉觉了，晚安～', animation: '' }
+            };
+            
+            const reaction = reactions[type];
+            if (reaction) {
+                // 添加动画
+                avatar.classList.add(reaction.animation);
+                setTimeout(() => {
+                    avatar.classList.remove(reaction.animation);
+                }, 2000);
+                
+                // Sammy 说话
+                speak(reaction.text);
+            }
+        }
+        
         // 互动功能
         function interact(type) {
+            sammyReact(type);
+            
             const messages = {
                 chat: 'Sammy 很开心和你聊天！',
                 feed: 'Sammy 吃得好香呀～',
@@ -505,7 +753,10 @@
                 sleep: 'Sammy 要睡觉觉了，晚安～'
             };
             
-            alert(messages[type]);
+            // 显示互动效果
+            setTimeout(() => {
+                addMessage(messages[type], 'sammy');
+            }, 500);
         }
         
         // 发送消息
@@ -519,17 +770,23 @@
             addMessage(message, 'user');
             input.value = '';
             
-            // 模拟 Sammy 回复
+            // Sammy 回复
             setTimeout(() => {
                 const responses = [
                     '真的吗？好有趣呀！',
                     'Sammy 也这么想！',
                     '哇，好厉害！',
                     'Sammy 想和你一起玩～',
-                    '今天好开心呀！'
+                    '今天好开心呀！',
+                    'Sammy 最喜欢你了！',
+                    '我们一起唱歌吧！',
+                    'Sammy 给你讲个故事吧！'
                 ];
                 const randomResponse = responses[Math.floor(Math.random() * responses.length)];
                 addMessage(randomResponse, 'sammy');
+                
+                // Sammy 语音回复
+                speak(randomResponse);
             }, 1000);
         }
         
@@ -566,6 +823,13 @@
             if (e.key === 'Enter') {
                 sendMessage();
             }
+        });
+        
+        // 页面加载时 Sammy 打招呼
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                speak('你好呀！我是 Sammy，今天也要开心哦～');
+            }, 1000);
         });
     </script>
 </body>
